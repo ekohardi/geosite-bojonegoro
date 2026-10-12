@@ -4,18 +4,12 @@ import { useEffect, useState } from 'react'
 import {
   ArrowDown,
   ArrowUpRight,
-  BookOpen,
   Compass,
-  GraduationCap,
   Headphones,
-  Landmark,
   MapPin,
   Menu,
   Pause,
   Play,
-  Quote,
-  Sparkles,
-  Users,
   Volume2,
   X,
 } from 'lucide-react'
@@ -27,77 +21,77 @@ const WA_PHONE = '6281234567890'
 const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
-interface TokohItem {
+interface MascotItem {
   id: string
   name: string
+  alias: string
   role: string
-  category: 'kultural' | 'pokdarwis' | 'akademisi'
   categoryLabel: string
+  image: string
+  stageClass: string
+  animClass: string
   desc: string
-  highlight: string
-  icon: 'sparkles' | 'book' | 'users' | 'grad' | 'landmark' | 'quote'
+  traits: string[]
+  quote: string
+  voiceText: string
 }
 
-const tokohList: TokohItem[] = [
+const mascotList: MascotItem[] = [
   {
-    id: 'mbah-rahmat',
-    name: 'Mbah Rahmat',
-    role: 'Sesepuh & Tokoh Spiritual Dusun Nglantung',
-    category: 'kultural',
-    categoryLabel: 'Kultural & Tradisi',
-    desc: 'Figur sentral yang sangat dihormati di Desa Drenges. Jejak makam dan petuah beliau menjadi jangkar kultural yang melengkapi keunikan ilmiah Kedung Lantung sebagai cultuursite.',
-    highlight: 'Menjaga harmoni spiritual antara masyarakat dan bentang alam hutan Kedung Lantung.',
-    icon: 'sparkles',
+    id: 'kidung',
+    name: 'Kak Kidung',
+    alias: 'KIDUNG',
+    role: 'Pemandu Trekking & Petualang Geowisata',
+    categoryLabel: 'Pemandu & Petualang',
+    image: '/tokoh/kak-kidung.jpg',
+    stageClass: 'kidung-stage',
+    animClass: 'anim-kidung',
+    desc: 'Petualang muda yang energik, bersahabat, dan cekatan. Mengenakan kaos merah dan ransel biru, Kak Kidung siap memandu pengunjung menyusuri aliran sungai dan formasi batuan purba Kedung Lantung.',
+    traits: ['Trekking Bebatuan', 'Pemandu Jalur', 'Sahabat Pengunjung'],
+    quote: 'Mari melangkah dengan aman dan nikmati jejak keajaiban alam purba Kedung Lantung!',
+    voiceText: 'Halo teman-teman! Saya Kak Kidung. Selamat datang di Geosite Kedung Lantung. Ayo kita jelajahi keindahan batuan purba dan alam Bojonegoro bersama-sama!',
   },
   {
-    id: 'subianto',
-    name: 'Subianto',
-    role: 'Kepala Dusun Nglantung & Penutur Tradisi',
-    category: 'kultural',
-    categoryLabel: 'Kultural & Tradisi',
-    desc: 'Penjaga memori kolektif yang menuturkan sejarah kearifan lokal pemanfaatan rembesan minyak purba (lantung) menggunakan bulu ayam untuk penerangan dan obat tradisional.',
-    highlight: 'Mewariskan cerita tutur kearifan geologi lintas generasi di tepian Sungai Borik.',
-    icon: 'book',
+    id: 'keke',
+    name: 'Dik Keke',
+    alias: 'KEKE',
+    role: 'Duta Cilik Konservasi & Edukasi Lingkungan',
+    categoryLabel: 'Duta Konservasi Cilik',
+    image: '/tokoh/dik-keke.png',
+    stageClass: 'keke-stage',
+    animClass: 'anim-keke',
+    desc: 'Gadis cilik yang ceria dengan ransel pink dan senyum ramah. Dik Keke menginspirasi generasi muda untuk selalu menjaga kebersihan cagar alam geologi dan tidak membuang sampah sembarangan.',
+    traits: ['Generasi Sadar Alam', 'Bebas Sampah', 'Ceria & Edukatif'],
+    quote: 'Bawa pulang kenangan manismu, tapi jangan tinggalkan sampah di cagar alam kita ya!',
+    voiceText: 'Hai sahabat! Namaku Dik Keke. Senang sekali bisa menyapa teman-teman! Ingat ya, selalu rawat alam dan jaga kebersihan Geosite Kedung Lantung!',
   },
   {
-    id: 'rico-thomas',
-    name: 'Rico Thomas',
-    role: 'Koordinator Pokdarwis Kedung Lantung',
-    category: 'pokdarwis',
-    categoryLabel: 'Pokdarwis & Penggerak',
-    desc: 'Ujung tombak pemandu lapangan (guiding & storytelling) yang aktif menyusun site plan pengembangan kawasan geosite saat evaluasi lapangan asesor UNESCO.',
-    highlight: 'Menggerakkan pemuda desa menjadi duta geowisata profesional dan tangguh.',
-    icon: 'users',
+    id: 'ruslan',
+    name: 'Mbah Lan',
+    alias: 'RUSLAN',
+    role: 'Sesepuh & Penutur Kearifan Lokal Lantung',
+    categoryLabel: 'Sesepuh Tradisi',
+    image: '/tokoh/mbah-lan.png',
+    stageClass: 'ruslan-stage',
+    animClass: 'anim-ruslan',
+    desc: 'Sesepuh berwibawa berbalut batik khas Bojonegoro dan caping bambu. Mbah Lan menyimpan hikayat rembesan minyak purba (lantung), cerita sejarah desa, dan filosofi hidup selaras dengan alam.',
+    traits: ['Penutur Cerita Rakyat', 'Kearifan Lokal', 'Penjaga Budaya'],
+    quote: 'Wong kuna nguri-uri bumi, anak putu kudu njaga warisan luhur Kedung Lantung.',
+    voiceText: 'Sugeng rawuh sederek sedaya. Kula Mbah Lan. Sumangga sami njaga lan nguri-uri cagar bumi warisan leluhur kita ing Kedung Lantung.',
   },
   {
-    id: 'dr-laily',
-    name: 'Dr. Laily Agustina R., S.Si., M.Sc.',
-    role: 'Tenaga Ahli Tim Geopark Bojonegoro (LPPM Unigoro)',
-    category: 'akademisi',
-    categoryLabel: 'Akademisi & Peneliti',
-    desc: 'Akademisi yang memimpin riset ilmiah biodiversitas dan pendampingan teknis masyarakat guna memenuhi pilar konservasi dan edukasi UNESCO Global Geopark.',
-    highlight: 'Menghubungkan sains kebumian dengan pemberdayaan nyata masyarakat lokal.',
-    icon: 'grad',
-  },
-  {
-    id: 'yaspingi',
-    name: 'Yaspingi',
-    role: 'Kepala Desa Drenges, Sugihwaras',
-    category: 'pokdarwis',
-    categoryLabel: 'Pamong Desa',
-    desc: 'Pemimpin desa yang mengawal regulasi pelindungan kawasan Kedung Lantung sebagai Cagar Alam Geologi serta mendorong geliat produk UMKM warga desa.',
-    highlight: 'Mengokohkan sinergi regulasi desa demi kelestarian cagar geologi berkelanjutan.',
-    icon: 'landmark',
-  },
-  {
-    id: 'andre',
-    name: 'Muhammad Andre',
-    role: 'Ketua Komunitas Bojonegoro History',
-    category: 'akademisi',
-    categoryLabel: 'Pegiat Sejarah & Riset',
-    desc: 'Pegiat literasi sejarah yang menelusuri arsip kolonial 1858-1860 dan memfasilitasi sarasehan budaya untuk mengungkap kronik minyak bumi tertua di Bojonegoro.',
-    highlight: 'Menghidupkan arsip sejarah geologi agar mudah dipahami generasi muda.',
-    icon: 'quote',
+    id: 'tungga',
+    name: 'Mbak Tungga',
+    alias: 'TUNGGA',
+    role: 'Peneliti Geologi & Biodiversitas Geopark',
+    categoryLabel: 'Saintis Kebumian',
+    image: '/tokoh/mbak-tungga.png',
+    stageClass: 'tungga-stage',
+    animClass: 'anim-tungga',
+    desc: 'Saintis muda berhijab dengan jas lab putih dan kaca pembesar. Mbak Tungga bertugas meneliti susunan batuan sedimen, rembesan hidrokarbon, dan biodiversitas flora-fauna cagar geologi.',
+    traits: ['Riset Kebumian', 'Biodiversitas Hutan', 'Edukasi Ilmiah'],
+    quote: 'Setiap lapisan batuan adalah lembaran buku sejarah jutaan tahun yang menunggu untuk kita pelajari.',
+    voiceText: 'Halo! Saya Mbak Tungga, peneliti Geopark. Setiap batu dan rekahan di Kedung Lantung menyimpan rekaman ilmiah jutaan tahun lalu. Mari kita pelajari bersama!',
   },
 ]
 
@@ -120,9 +114,7 @@ function WhatsAppIcon({ size = 16, className = '' }: { size?: number; className?
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [tokohCategory, setTokohCategory] = useState<'all' | 'kultural' | 'pokdarwis' | 'akademisi'>('all')
-
-  const filteredTokoh = tokohCategory === 'all' ? tokohList : tokohList.filter((item) => item.category === tokohCategory)
+  const [speakingMascotId, setSpeakingMascotId] = useState<string | null>(null)
 
   useEffect(() => {
     return () => {
@@ -139,8 +131,9 @@ export default function Page() {
         setIsPlaying(false)
       } else {
         window.speechSynthesis.cancel()
+        setSpeakingMascotId(null)
         const text =
-          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Jejak air, batu, dan waktu yang membentuk kisah bumi di tepian hutan Bojonegoro. Warisan geologi ini dirawat bersama oleh sesepuh Mbah Rahmat, Kepala Dusun Subianto, penggerak Pokdarwis Rico Thomas, Kepala Desa Yaspingi, akademisi Unigoro Dr. Laily Agustina, dan komunitas Bojonegoro History menuju UNESCO Global Geopark.'
+          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Jejak air, batu, dan waktu yang membentuk kisah bumi di tepian hutan Bojonegoro. Kenali maskot resmi kami: Dik Keke, Kak Kidung, Mbah Lan, dan Mbak Tungga yang bersama masyarakat merawat cagar geologi ini.'
         const utterance = new SpeechSynthesisUtterance(text)
         utterance.lang = 'id-ID'
         utterance.rate = 0.95
@@ -151,6 +144,25 @@ export default function Page() {
       }
     } else {
       setIsPlaying(!isPlaying)
+    }
+  }
+
+  const speakMascot = (id: string, text: string) => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      if (speakingMascotId === id) {
+        window.speechSynthesis.cancel()
+        setSpeakingMascotId(null)
+      } else {
+        window.speechSynthesis.cancel()
+        setIsPlaying(false)
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = 'id-ID'
+        utterance.rate = 0.95
+        utterance.onend = () => setSpeakingMascotId(null)
+        utterance.onerror = () => setSpeakingMascotId(null)
+        window.speechSynthesis.speak(utterance)
+        setSpeakingMascotId(id)
+      }
     }
   }
 
@@ -214,80 +226,59 @@ export default function Page() {
         <div className="section-kicker"><span>02</span><i /></div>
         <div className="tokoh-header">
           <div className="tokoh-header-text">
-            <p className="eyebrow">Pengenalan tokoh</p>
-            <h2>Penjaga Tradisi &<br /><em>Penggerak Geopark.</em></h2>
+            <p className="eyebrow">Pengenalan tokoh &amp; maskot</p>
+            <h2>Karakter Ikonik &amp;<br /><em>Penjaga Geopark.</em></h2>
             <p className="tokoh-header-intro">
-              Mulai dari sesepuh penjaga kearifan lokal, pemuda penggerak Pokdarwis, hingga akademisi dan pamong desa yang bersama-sama merawat cerita Kedung Lantung menuju pengakuan UNESCO Global Geopark.
+              Kenali 4 figur maskot resmi Geosite Kedung Lantung—<strong>KE-DUNG LAN-TUNG</strong> (Dik <strong>KE</strong>ke, Kak Ki<strong>DUNG</strong>, Mbah Rus<strong>LAN</strong>, dan Mbak <strong>TUNG</strong>ga)—yang membawa misi edukasi lingkungan, kearifan lokal, petualangan wisata, dan sains kebumian.
             </p>
-          </div>
-          <div className="tokoh-filters" role="tablist" aria-label="Filter kategori tokoh">
-            <button
-              type="button"
-              className={tokohCategory === 'all' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
-              onClick={() => setTokohCategory('all')}
-            >
-              Semua ({tokohList.length})
-            </button>
-            <button
-              type="button"
-              className={tokohCategory === 'kultural' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
-              onClick={() => setTokohCategory('kultural')}
-            >
-              Kultural & Tradisi
-            </button>
-            <button
-              type="button"
-              className={tokohCategory === 'pokdarwis' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
-              onClick={() => setTokohCategory('pokdarwis')}
-            >
-              Pokdarwis & Pamong
-            </button>
-            <button
-              type="button"
-              className={tokohCategory === 'akademisi' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
-              onClick={() => setTokohCategory('akademisi')}
-            >
-              Akademisi & Peneliti
-            </button>
           </div>
         </div>
 
-        <div className="tokoh-grid">
-          {filteredTokoh.map((tokoh) => {
-            const IconComponent =
-              tokoh.icon === 'sparkles'
-                ? Sparkles
-                : tokoh.icon === 'book'
-                ? BookOpen
-                : tokoh.icon === 'users'
-                ? Users
-                : tokoh.icon === 'grad'
-                ? GraduationCap
-                : tokoh.icon === 'landmark'
-                ? Landmark
-                : Quote
-
-            return (
-              <article key={tokoh.id} className="tokoh-card">
-                <div>
-                  <div className="tokoh-card-top">
-                    <div className="tokoh-icon-wrapper" aria-hidden="true">
-                      <IconComponent size={20} />
-                    </div>
-                    <span className={`tokoh-badge ${tokoh.category}`}>
-                      {tokoh.categoryLabel}
+        <div className="tokoh-grid-mascots">
+          {mascotList.map((m) => (
+            <article
+              key={m.id}
+              className={`tokoh-mascot-card ${speakingMascotId === m.id ? 'speaking' : ''}`}
+            >
+              <span className="tokoh-tag-float">{m.categoryLabel}</span>
+              <div className={`tokoh-stage ${m.stageClass}`}>
+                <div className="tokoh-stage-aura" />
+                <img
+                  src={m.image}
+                  alt={`${m.name} - ${m.role}`}
+                  className={`tokoh-mascot-img ${m.animClass}`}
+                  loading="lazy"
+                />
+              </div>
+              <div className="tokoh-info-pane">
+                <div className="tokoh-title-bar">
+                  <h3 className="tokoh-char-name">{m.name}</h3>
+                  <span className="tokoh-char-alias">{m.alias}</span>
+                </div>
+                <p className="tokoh-char-role">{m.role}</p>
+                <p className="tokoh-char-desc">{m.desc}</p>
+                <div className="tokoh-trait-chips">
+                  {m.traits.map((trait) => (
+                    <span key={trait} className="tokoh-trait-chip">
+                      {trait}
                     </span>
-                  </div>
-                  <h3 className="tokoh-name">{tokoh.name}</h3>
-                  <p className="tokoh-role">{tokoh.role}</p>
-                  <p className="tokoh-desc">{tokoh.desc}</p>
+                  ))}
                 </div>
-                <div className="tokoh-quote">
-                  &ldquo;{tokoh.highlight}&rdquo;
+                <div className="tokoh-quote-box">
+                  <p>&ldquo;{m.quote}&rdquo;</p>
+                  <button
+                    type="button"
+                    className={`tokoh-voice-btn ${speakingMascotId === m.id ? 'active' : ''}`}
+                    onClick={() => speakMascot(m.id, m.voiceText)}
+                    aria-label={`Dengarkan sapaan ${m.name}`}
+                  >
+                    {speakingMascotId === m.id ? <Pause size={13} /> : <Volume2 size={13} />}
+                    <span>{speakingMascotId === m.id ? 'Hentikan Suara' : `Dengar Sapaan ${m.name.split(' ')[1] || m.name}`}</span>
+                  </button>
                 </div>
-              </article>
-            )
-          })}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
