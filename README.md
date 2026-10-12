@@ -16,6 +16,7 @@ Website resmi / landing page untuk **Geosite Kedung Lantung (G-05)**, salah satu
 - **Hero Panorama:** Tampilan visual megah Kedung Lantung dengan identitas resmi kode geosite `G-05`.
 - **Eksplorasi Warisan Geologi:** Rangkuman nilai ilmiah, edukasi, dan geodiversitas bentang alam.
 - **Galeri Momen Lapangan:** Showcase visual resolusi tinggi aliran air dan formasi batuan alami.
+- **Pengenalan Tokoh & Penggerak:** Dokumentasi profil tokoh adat/spiritual (Mbah Rahmat), penutur tradisi lisan (Subianto), penggerak Pokdarwis (Rico Thomas), pamong desa (Yaspingi), serta akademisi dan sejarawan (Dr. Laily Agustina & M. Andre) dengan filter kategori interaktif.
 - **Narasi Interaktif (Audio):** Tombol narasi suara interaktif bahasa Indonesia untuk pengalaman pengunjung yang lebih mendalam.
 - **WhatsApp Fast Response:** Integrasi menu navigasi, floating widget, dan kontak footer terhubung langsung ke WhatsApp admin.
 - **Desain Responsif & Cepat:** Desain ramah perangkat seluler dengan navigasi menu dinamis dan performa tinggi berbasis Turbopack.

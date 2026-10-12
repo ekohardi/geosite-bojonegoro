@@ -1,7 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowUpRight, Compass, Headphones, MapPin, Menu, Pause, Play, Volume2, X } from 'lucide-react'
+import {
+  ArrowDown,
+  ArrowUpRight,
+  BookOpen,
+  Compass,
+  GraduationCap,
+  Headphones,
+  Landmark,
+  MapPin,
+  Menu,
+  Pause,
+  Play,
+  Quote,
+  Sparkles,
+  Users,
+  Volume2,
+  X,
+} from 'lucide-react'
 
 const heroImage = 'https://i.ibb.co.com/sdd1R1Ym/20250919-100259-IMG-3387.jpg'
 const detailImage = 'https://i.ibb.co.com/gMjPxRwL/20250919-100259-IMG-3387-Copy.jpg'
@@ -9,6 +26,80 @@ const detailImage = 'https://i.ibb.co.com/gMjPxRwL/20250919-100259-IMG-3387-Copy
 const WA_PHONE = '6281234567890'
 const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
+
+interface TokohItem {
+  id: string
+  name: string
+  role: string
+  category: 'kultural' | 'pokdarwis' | 'akademisi'
+  categoryLabel: string
+  desc: string
+  highlight: string
+  icon: 'sparkles' | 'book' | 'users' | 'grad' | 'landmark' | 'quote'
+}
+
+const tokohList: TokohItem[] = [
+  {
+    id: 'mbah-rahmat',
+    name: 'Mbah Rahmat',
+    role: 'Sesepuh & Tokoh Spiritual Dusun Nglantung',
+    category: 'kultural',
+    categoryLabel: 'Kultural & Tradisi',
+    desc: 'Figur sentral yang sangat dihormati di Desa Drenges. Jejak makam dan petuah beliau menjadi jangkar kultural yang melengkapi keunikan ilmiah Kedung Lantung sebagai cultuursite.',
+    highlight: 'Menjaga harmoni spiritual antara masyarakat dan bentang alam hutan Kedung Lantung.',
+    icon: 'sparkles',
+  },
+  {
+    id: 'subianto',
+    name: 'Subianto',
+    role: 'Kepala Dusun Nglantung & Penutur Tradisi',
+    category: 'kultural',
+    categoryLabel: 'Kultural & Tradisi',
+    desc: 'Penjaga memori kolektif yang menuturkan sejarah kearifan lokal pemanfaatan rembesan minyak purba (lantung) menggunakan bulu ayam untuk penerangan dan obat tradisional.',
+    highlight: 'Mewariskan cerita tutur kearifan geologi lintas generasi di tepian Sungai Borik.',
+    icon: 'book',
+  },
+  {
+    id: 'rico-thomas',
+    name: 'Rico Thomas',
+    role: 'Koordinator Pokdarwis Kedung Lantung',
+    category: 'pokdarwis',
+    categoryLabel: 'Pokdarwis & Penggerak',
+    desc: 'Ujung tombak pemandu lapangan (guiding & storytelling) yang aktif menyusun site plan pengembangan kawasan geosite saat evaluasi lapangan asesor UNESCO.',
+    highlight: 'Menggerakkan pemuda desa menjadi duta geowisata profesional dan tangguh.',
+    icon: 'users',
+  },
+  {
+    id: 'dr-laily',
+    name: 'Dr. Laily Agustina R., S.Si., M.Sc.',
+    role: 'Tenaga Ahli Tim Geopark Bojonegoro (LPPM Unigoro)',
+    category: 'akademisi',
+    categoryLabel: 'Akademisi & Peneliti',
+    desc: 'Akademisi yang memimpin riset ilmiah biodiversitas dan pendampingan teknis masyarakat guna memenuhi pilar konservasi dan edukasi UNESCO Global Geopark.',
+    highlight: 'Menghubungkan sains kebumian dengan pemberdayaan nyata masyarakat lokal.',
+    icon: 'grad',
+  },
+  {
+    id: 'yaspingi',
+    name: 'Yaspingi',
+    role: 'Kepala Desa Drenges, Sugihwaras',
+    category: 'pokdarwis',
+    categoryLabel: 'Pamong Desa',
+    desc: 'Pemimpin desa yang mengawal regulasi pelindungan kawasan Kedung Lantung sebagai Cagar Alam Geologi serta mendorong geliat produk UMKM warga desa.',
+    highlight: 'Mengokohkan sinergi regulasi desa demi kelestarian cagar geologi berkelanjutan.',
+    icon: 'landmark',
+  },
+  {
+    id: 'andre',
+    name: 'Muhammad Andre',
+    role: 'Ketua Komunitas Bojonegoro History',
+    category: 'akademisi',
+    categoryLabel: 'Pegiat Sejarah & Riset',
+    desc: 'Pegiat literasi sejarah yang menelusuri arsip kolonial 1858-1860 dan memfasilitasi sarasehan budaya untuk mengungkap kronik minyak bumi tertua di Bojonegoro.',
+    highlight: 'Menghidupkan arsip sejarah geologi agar mudah dipahami generasi muda.',
+    icon: 'quote',
+  },
+]
 
 function WhatsAppIcon({ size = 16, className = '' }: { size?: number; className?: string }) {
   return (
@@ -29,6 +120,9 @@ function WhatsAppIcon({ size = 16, className = '' }: { size?: number; className?
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [tokohCategory, setTokohCategory] = useState<'all' | 'kultural' | 'pokdarwis' | 'akademisi'>('all')
+
+  const filteredTokoh = tokohCategory === 'all' ? tokohList : tokohList.filter((item) => item.category === tokohCategory)
 
   useEffect(() => {
     return () => {
@@ -46,7 +140,7 @@ export default function Page() {
       } else {
         window.speechSynthesis.cancel()
         const text =
-          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Jejak air, batu, dan waktu yang membentuk kisah bumi di tepian hutan Bojonegoro. Kedung Lantung adalah salah satu warisan geologi penting di Geopark Bojonegoro. Air yang mengalir melewati batuan selama ribuan tahun menciptakan lanskap alami yang tenang, teduh, dan penuh karakter.'
+          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Jejak air, batu, dan waktu yang membentuk kisah bumi di tepian hutan Bojonegoro. Warisan geologi ini dirawat bersama oleh sesepuh Mbah Rahmat, Kepala Dusun Subianto, penggerak Pokdarwis Rico Thomas, Kepala Desa Yaspingi, akademisi Unigoro Dr. Laily Agustina, dan komunitas Bojonegoro History menuju UNESCO Global Geopark.'
         const utterance = new SpeechSynthesisUtterance(text)
         utterance.lang = 'id-ID'
         utterance.rate = 0.95
@@ -72,6 +166,7 @@ export default function Page() {
           <a href="#beranda" onClick={() => setMenuOpen(false)}>Beranda</a>
           <a href="#tentang" onClick={() => setMenuOpen(false)}>Tentang</a>
           <a href="#nilai" onClick={() => setMenuOpen(false)}>Nilai Geologi</a>
+          <a href="#tokoh" onClick={() => setMenuOpen(false)}>Pengenalan Tokoh</a>
           <a href="#galeri" onClick={() => setMenuOpen(false)}>Galeri</a>
           <a
             href={waUrl}
@@ -112,6 +207,87 @@ export default function Page() {
         <div className="page-width feature-grid">
           <div className="feature-copy"><p className="eyebrow">Warisan geologi</p><h2>Lebih dari<br /><em>sekadar tempat.</em></h2><p className="muted">Kedung Lantung menyimpan nilai ilmiah, pendidikan, dan pariwisata. Setiap lekuk batu dan aliran air membentuk ruang belajar yang hidup.</p><div className="stat-row"><div><strong>G-05</strong><span>Kode geosite</span></div><div><strong>Geo-<br />diversitas</strong><span>Jenis warisan</span></div></div></div>
           <div className="feature-visual"><img src={detailImage} alt="Detail aliran air dan bebatuan Kedung Lantung" /><div className="image-note"><MapPin size={16} /> Kedung Lantung, Bojonegoro</div></div>
+        </div>
+      </section>
+
+      <section id="tokoh" className="tokoh-section page-width">
+        <div className="section-kicker"><span>02</span><i /></div>
+        <div className="tokoh-header">
+          <div className="tokoh-header-text">
+            <p className="eyebrow">Pengenalan tokoh</p>
+            <h2>Penjaga Tradisi &<br /><em>Penggerak Geopark.</em></h2>
+            <p className="tokoh-header-intro">
+              Mulai dari sesepuh penjaga kearifan lokal, pemuda penggerak Pokdarwis, hingga akademisi dan pamong desa yang bersama-sama merawat cerita Kedung Lantung menuju pengakuan UNESCO Global Geopark.
+            </p>
+          </div>
+          <div className="tokoh-filters" role="tablist" aria-label="Filter kategori tokoh">
+            <button
+              type="button"
+              className={tokohCategory === 'all' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
+              onClick={() => setTokohCategory('all')}
+            >
+              Semua ({tokohList.length})
+            </button>
+            <button
+              type="button"
+              className={tokohCategory === 'kultural' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
+              onClick={() => setTokohCategory('kultural')}
+            >
+              Kultural & Tradisi
+            </button>
+            <button
+              type="button"
+              className={tokohCategory === 'pokdarwis' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
+              onClick={() => setTokohCategory('pokdarwis')}
+            >
+              Pokdarwis & Pamong
+            </button>
+            <button
+              type="button"
+              className={tokohCategory === 'akademisi' ? 'tokoh-filter-btn active' : 'tokoh-filter-btn'}
+              onClick={() => setTokohCategory('akademisi')}
+            >
+              Akademisi & Peneliti
+            </button>
+          </div>
+        </div>
+
+        <div className="tokoh-grid">
+          {filteredTokoh.map((tokoh) => {
+            const IconComponent =
+              tokoh.icon === 'sparkles'
+                ? Sparkles
+                : tokoh.icon === 'book'
+                ? BookOpen
+                : tokoh.icon === 'users'
+                ? Users
+                : tokoh.icon === 'grad'
+                ? GraduationCap
+                : tokoh.icon === 'landmark'
+                ? Landmark
+                : Quote
+
+            return (
+              <article key={tokoh.id} className="tokoh-card">
+                <div>
+                  <div className="tokoh-card-top">
+                    <div className="tokoh-icon-wrapper" aria-hidden="true">
+                      <IconComponent size={20} />
+                    </div>
+                    <span className={`tokoh-badge ${tokoh.category}`}>
+                      {tokoh.categoryLabel}
+                    </span>
+                  </div>
+                  <h3 className="tokoh-name">{tokoh.name}</h3>
+                  <p className="tokoh-role">{tokoh.role}</p>
+                  <p className="tokoh-desc">{tokoh.desc}</p>
+                </div>
+                <div className="tokoh-quote">
+                  &ldquo;{tokoh.highlight}&rdquo;
+                </div>
+              </article>
+            )
+          })}
         </div>
       </section>
 
