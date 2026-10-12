@@ -23,75 +23,85 @@ const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
 interface MascotItem {
   id: string
+  emoji: string
   name: string
   alias: string
-  role: string
+  title: string
   categoryLabel: string
+  greeting: string
   image: string
   stageClass: string
   animClass: string
   desc: string
+  takeaway: string
   traits: string[]
-  quote: string
   voiceText: string
 }
 
 const mascotList: MascotItem[] = [
   {
-    id: 'kidung',
-    name: 'Kak Kidung',
-    alias: 'KIDUNG',
-    role: 'Pemandu Trekking & Petualang Geowisata',
-    categoryLabel: 'Pemandu & Petualang',
-    image: '/tokoh/kak-kidung.jpg',
-    stageClass: 'kidung-stage',
-    animClass: 'anim-kidung',
-    desc: 'Petualang muda yang energik, bersahabat, dan cekatan. Mengenakan kaos merah dan ransel biru, Kak Kidung siap memandu pengunjung menyusuri aliran sungai dan formasi batuan purba Kedung Lantung.',
-    traits: ['Trekking Bebatuan', 'Pemandu Jalur', 'Sahabat Pengunjung'],
-    quote: 'Mari melangkah dengan aman dan nikmati jejak keajaiban alam purba Kedung Lantung!',
-    voiceText: 'Halo teman-teman! Saya Kak Kidung. Selamat datang di Geosite Kedung Lantung. Ayo kita jelajahi keindahan batuan purba dan alam Bojonegoro bersama-sama!',
-  },
-  {
-    id: 'keke',
-    name: 'Dik Keke',
-    alias: 'KEKE',
-    role: 'Duta Cilik Konservasi & Edukasi Lingkungan',
-    categoryLabel: 'Duta Konservasi Cilik',
-    image: '/tokoh/dik-keke.png',
-    stageClass: 'keke-stage',
-    animClass: 'anim-keke',
-    desc: 'Gadis cilik yang ceria dengan ransel pink dan senyum ramah. Dik Keke menginspirasi generasi muda untuk selalu menjaga kebersihan cagar alam geologi dan tidak membuang sampah sembarangan.',
-    traits: ['Generasi Sadar Alam', 'Bebas Sampah', 'Ceria & Edukatif'],
-    quote: 'Bawa pulang kenangan manismu, tapi jangan tinggalkan sampah di cagar alam kita ya!',
-    voiceText: 'Hai sahabat! Namaku Dik Keke. Senang sekali bisa menyapa teman-teman! Ingat ya, selalu rawat alam dan jaga kebersihan Geosite Kedung Lantung!',
-  },
-  {
     id: 'ruslan',
+    emoji: '👴',
     name: 'Mbah Lan',
     alias: 'RUSLAN',
-    role: 'Sesepuh & Penutur Kearifan Lokal Lantung',
-    categoryLabel: 'Sesepuh Tradisi',
+    title: 'Tetua Desa',
+    categoryLabel: 'Tetua Desa',
+    greeting: '“Halo, Nak! Aku Mbah Lan.”',
     image: '/tokoh/mbah-lan.png',
     stageClass: 'ruslan-stage',
     animClass: 'anim-ruslan',
-    desc: 'Sesepuh berwibawa berbalut batik khas Bojonegoro dan caping bambu. Mbah Lan menyimpan hikayat rembesan minyak purba (lantung), cerita sejarah desa, dan filosofi hidup selaras dengan alam.',
-    traits: ['Penutur Cerita Rakyat', 'Kearifan Lokal', 'Penjaga Budaya'],
-    quote: 'Wong kuna nguri-uri bumi, anak putu kudu njaga warisan luhur Kedung Lantung.',
-    voiceText: 'Sugeng rawuh sederek sedaya. Kula Mbah Lan. Sumangga sami njaga lan nguri-uri cagar bumi warisan leluhur kita ing Kedung Lantung.',
+    desc: 'Mbah Lan adalah sosok yang paling memahami sejarah, budaya, dan kearifan lokal Kedung Lantung. Bersama Mbah Lan, kita bisa mendengarkan cerita tentang bagaimana kawasan ini dikenal dan dimanfaatkan oleh masyarakat, mengenal tradisi setempat, serta memahami hubungan masyarakat dengan lingkungan di sekitarnya.',
+    takeaway: 'Kalau ingin tahu cerita masa lalu Kedung Lantung, ikuti Mbah Lan!',
+    traits: ['Sejarah & Budaya', 'Kearifan Lokal', 'Tradisi Masyarakat'],
+    voiceText: 'Halo, Nak! Aku Mbah Lan. Mbah Lan paling memahami sejarah, budaya, dan kearifan lokal Kedung Lantung. Kalau ingin tahu cerita masa lalu Kedung Lantung, ikuti Mbah Lan ya!',
   },
   {
     id: 'tungga',
+    emoji: '🔬',
     name: 'Mbak Tungga',
     alias: 'TUNGGA',
-    role: 'Peneliti Geologi & Biodiversitas Geopark',
-    categoryLabel: 'Saintis Kebumian',
+    title: 'Scientist (Ilmuwan)',
+    categoryLabel: 'Scientist (Ilmuwan)',
+    greeting: '“Hai! Aku Mbak Tungga. Yuk, kita cari tahu rahasia alam Kedung Lantung!”',
     image: '/tokoh/mbak-tungga.png',
     stageClass: 'tungga-stage',
     animClass: 'anim-tungga',
-    desc: 'Saintis muda berhijab dengan jas lab putih dan kaca pembesar. Mbak Tungga bertugas meneliti susunan batuan sedimen, rembesan hidrokarbon, dan biodiversitas flora-fauna cagar geologi.',
-    traits: ['Riset Kebumian', 'Biodiversitas Hutan', 'Edukasi Ilmiah'],
-    quote: 'Setiap lapisan batuan adalah lembaran buku sejarah jutaan tahun yang menunggu untuk kita pelajari.',
-    voiceText: 'Halo! Saya Mbak Tungga, peneliti Geopark. Setiap batu dan rekahan di Kedung Lantung menyimpan rekaman ilmiah jutaan tahun lalu. Mari kita pelajari bersama!',
+    desc: 'Mbak Tungga adalah sosok cerdas yang senang berbagi ilmu pengetahuan, terutama tentang keterkaitan antara geologi, biologi, dan budaya. Bersama Mbak Tungga, kita diajak melihat bahwa alam tidak berdiri sendiri. Bentuk dan proses geologi dapat memengaruhi lingkungan, lingkungan menjadi rumah bagi berbagai makhluk hidup, dan semuanya kemudian berhubungan dengan kehidupan serta budaya masyarakat.',
+    takeaway: 'Kalau ingin tahu “mengapa” sesuatu bisa terjadi di alam, tanyakan kepada Mbak Tungga!',
+    traits: ['Geologi & Biologi', 'Rahasia Alam', 'Sains Lingkungan'],
+    voiceText: 'Hai! Aku Mbak Tungga. Yuk, kita cari tahu rahasia alam Kedung Lantung! Kalau ingin tahu mengapa sesuatu bisa terjadi di alam, tanyakan kepada Mbak Tungga!',
+  },
+  {
+    id: 'kidung',
+    emoji: '🧒',
+    name: 'Kak Kidung',
+    alias: 'KIDUNG',
+    title: 'Si Paling Penasaran',
+    categoryLabel: 'Si Paling Penasaran',
+    greeting: '“Aku Kak Kidung! Ada apa di sana? Kenapa bisa begitu? Yuk, kita cari tahu!”',
+    image: '/tokoh/kak-kidung.jpg',
+    stageClass: 'kidung-stage',
+    animClass: 'anim-kidung',
+    desc: 'Kak Kidung adalah sosok yang selalu ingin tahu, menyukai tantangan dan hal-hal baru. Kak Kidung mengajak kita untuk tidak hanya melihat, tetapi juga mengamati, bertanya, mencoba, dan menemukan. Setiap sudut Kedung Lantung bisa menjadi sebuah petualangan baru.',
+    takeaway: 'Jadi, jangan takut bertanya. Rasa penasaran adalah awal dari sebuah penemuan!',
+    traits: ['Eksplorasi & Petualang', 'Tantangan Baru', 'Rasa Ingin Tahu'],
+    voiceText: 'Aku Kak Kidung! Ada apa di sana? Kenapa bisa begitu? Yuk, kita cari tahu! Jadi, jangan takut bertanya. Rasa penasaran adalah awal dari sebuah penemuan!',
+  },
+  {
+    id: 'keke',
+    emoji: '👧',
+    name: 'Dek Keke',
+    alias: 'KEKE',
+    title: 'Si Paling Ceria',
+    categoryLabel: 'Si Paling Ceria',
+    greeting: '“Hai teman-teman! Ayo jalan-jalan dan bertualang bersama!”',
+    image: '/tokoh/dik-keke.png',
+    stageClass: 'keke-stage',
+    animClass: 'anim-keke',
+    desc: 'Dek Keke adalah sosok yang penuh semangat, suka berteman, dan suka berpetualang. Bersama Dek Keke, menjelajah Kedung Lantung menjadi kegiatan yang menyenangkan. Kita bisa menikmati alam, bermain sambil belajar, bertemu teman baru, dan menemukan berbagai hal menarik di sepanjang perjalanan.',
+    takeaway: 'Karena belajar tidak harus selalu duduk di dalam kelas. Alam juga bisa menjadi tempat belajar yang seru!',
+    traits: ['Penuh Semangat', 'Bermain & Belajar', 'Teman Baru'],
+    voiceText: 'Hai teman-teman! Ayo jalan-jalan dan bertualang bersama! Karena belajar tidak harus selalu duduk di dalam kelas. Alam juga bisa menjadi tempat belajar yang seru!',
   },
 ]
 
@@ -133,7 +143,7 @@ export default function Page() {
         window.speechSynthesis.cancel()
         setSpeakingMascotId(null)
         const text =
-          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Jejak air, batu, dan waktu yang membentuk kisah bumi di tepian hutan Bojonegoro. Kenali maskot resmi kami: Dik Keke, Kak Kidung, Mbah Lan, dan Mbak Tungga yang bersama masyarakat merawat cagar geologi ini.'
+          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Kenalan dengan teman-teman kita: Mbah Lan, Mbak Tungga, Kak Kidung, dan Dek Keke. Empat sahabat dengan karakter dan keahlian yang berbeda yang menemani perjalanan petualangan kita di Kedung Lantung.'
         const utterance = new SpeechSynthesisUtterance(text)
         utterance.lang = 'id-ID'
         utterance.rate = 0.95
@@ -226,10 +236,10 @@ export default function Page() {
         <div className="section-kicker"><span>02</span><i /></div>
         <div className="tokoh-header">
           <div className="tokoh-header-text">
-            <p className="eyebrow">Pengenalan tokoh &amp; maskot</p>
-            <h2>Karakter Ikonik &amp;<br /><em>Penjaga Geopark.</em></h2>
+            <p className="eyebrow">Pengenalan tokoh</p>
+            <h2>Kenalan dengan<br /><em>Teman-Teman Kita.</em></h2>
             <p className="tokoh-header-intro">
-              Kenali 4 figur maskot resmi Geosite Kedung Lantung—<strong>KE-DUNG LAN-TUNG</strong> (Dik <strong>KE</strong>ke, Kak Ki<strong>DUNG</strong>, Mbah Rus<strong>LAN</strong>, dan Mbak <strong>TUNG</strong>ga)—yang membawa misi edukasi lingkungan, kearifan lokal, petualangan wisata, dan sains kebumian.
+              Agar perjalanan semakin menyenangkan, kita akan ditemani oleh empat sahabat dengan karakter dan keahlian yang berbeda.
             </p>
           </div>
         </div>
@@ -240,12 +250,12 @@ export default function Page() {
               key={m.id}
               className={`tokoh-mascot-card ${speakingMascotId === m.id ? 'speaking' : ''}`}
             >
-              <span className="tokoh-tag-float">{m.categoryLabel}</span>
+              <span className="tokoh-tag-float">{m.emoji} {m.categoryLabel}</span>
               <div className={`tokoh-stage ${m.stageClass}`}>
                 <div className="tokoh-stage-aura" />
                 <img
                   src={m.image}
-                  alt={`${m.name} - ${m.role}`}
+                  alt={`${m.name} — ${m.title}`}
                   className={`tokoh-mascot-img ${m.animClass}`}
                   loading="lazy"
                 />
@@ -255,8 +265,14 @@ export default function Page() {
                   <h3 className="tokoh-char-name">{m.name}</h3>
                   <span className="tokoh-char-alias">{m.alias}</span>
                 </div>
-                <p className="tokoh-char-role">{m.role}</p>
+                <p className="tokoh-char-role">{m.emoji} {m.title}</p>
+                <div className="tokoh-greeting-bubble">
+                  {m.greeting}
+                </div>
                 <p className="tokoh-char-desc">{m.desc}</p>
+                <div className="tokoh-takeaway-box">
+                  <p>✨ {m.takeaway}</p>
+                </div>
                 <div className="tokoh-trait-chips">
                   {m.traits.map((trait) => (
                     <span key={trait} className="tokoh-trait-chip">
@@ -264,8 +280,7 @@ export default function Page() {
                     </span>
                   ))}
                 </div>
-                <div className="tokoh-quote-box">
-                  <p>&ldquo;{m.quote}&rdquo;</p>
+                <div style={{ marginTop: 'auto' }}>
                   <button
                     type="button"
                     className={`tokoh-voice-btn ${speakingMascotId === m.id ? 'active' : ''}`}
@@ -273,7 +288,7 @@ export default function Page() {
                     aria-label={`Dengarkan sapaan ${m.name}`}
                   >
                     {speakingMascotId === m.id ? <Pause size={13} /> : <Volume2 size={13} />}
-                    <span>{speakingMascotId === m.id ? 'Hentikan Suara' : `Dengar Sapaan ${m.name.split(' ')[1] || m.name}`}</span>
+                    <span>{speakingMascotId === m.id ? 'Hentikan Suara' : `Dengar Sapaan ${m.name}`}</span>
                   </button>
                 </div>
               </div>
