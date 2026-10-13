@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { getSupabaseClient } from '@/lib/supabase/client'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -125,6 +126,31 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [speakingMascotId, setSpeakingMascotId] = useState<string | null>(null)
+  const [guestbookStatus, setGuestbookStatus] = useState('')
+  const [isSavingGuestbook, setIsSavingGuestbook] = useState(false)
+
+  const submitGuestbook = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsSavingGuestbook(true)
+    setGuestbookStatus('')
+    const form = new FormData(event.currentTarget)
+    const supabase = getSupabaseClient()
+    const { error } = await (supabase.from('guestbook_entries') as any).insert({
+      name: String(form.get('name') ?? '').trim(),
+      institution: String(form.get('institution') ?? '').trim(),
+      phone: String(form.get('phone') ?? '').trim() || null,
+      visit_date: String(form.get('visit_date') ?? ''),
+      purpose: String(form.get('purpose') ?? '').trim(),
+      message: String(form.get('message') ?? '').trim() || null,
+    })
+    setIsSavingGuestbook(false)
+    if (error) {
+      setGuestbookStatus('Buku tamu belum dapat disimpan. Silakan periksa kembali isian Anda.')
+      return
+    }
+    event.currentTarget.reset()
+    setGuestbookStatus('Terima kasih. Kehadiran Anda sudah tercatat di buku tamu.')
+  }
 
   useEffect(() => {
     return () => {
@@ -190,6 +216,7 @@ export default function Page() {
           <a href="#nilai" onClick={() => setMenuOpen(false)}>Nilai Geologi</a>
           <a href="#tokoh" onClick={() => setMenuOpen(false)}>Pengenalan Tokoh</a>
           <a href="#galeri" onClick={() => setMenuOpen(false)}>Galeri</a>
+          <a href="#buku-tamu" onClick={() => setMenuOpen(false)}>Isi Buku Tamu Kunjungan</a>
           <a
             href={waUrl}
             target="_blank"
@@ -298,6 +325,27 @@ export default function Page() {
       </section>
 
       <section id="galeri" className="gallery-section page-width"><div className="gallery-heading"><div><p className="eyebrow">Momen di lapangan</p><h2>Rasakan <em>suasananya.</em></h2></div><span>Geser untuk menjelajah</span></div><div className="gallery-grid"><img src={heroImage} alt="Pemandangan Kedung Lantung" /><div className="gallery-card"><Volume2 size={22} /><p>Suara alam akan melengkapi perjalanan Anda.</p><small>FITUR AUDIO SEGERA HADIR</small></div><img src={detailImage} alt="Bebatuan di Kedung Lantung" /></div></section>
+      <section id="buku-tamu" className="guestbook-section">
+        <div className="page-width guestbook-grid">
+          <div className="guestbook-copy">
+            <p className="eyebrow">Buku tamu kunjungan</p>
+            <h2>Catat<br /><em>kehadiran Anda.</em></h2>
+            <p>Terima kasih telah berkunjung ke Geosite Kedung Lantung. Silakan isi formulir berikut agar kunjungan Anda tersimpan dalam database buku tamu kami.</p>
+          </div>
+          <form className="guestbook-form" onSubmit={submitGuestbook}>
+            <div className="guestbook-fields">
+              <div className="guestbook-field"><label htmlFor="guest-name">Nama lengkap</label><input id="guest-name" name="name" required minLength={2} maxLength={120} autoComplete="name" /></div>
+              <div className="guestbook-field"><label htmlFor="guest-institution">Asal instansi/komunitas</label><input id="guest-institution" name="institution" required minLength={2} maxLength={160} /></div>
+              <div className="guestbook-field"><label htmlFor="guest-phone">Nomor telepon (opsional)</label><input id="guest-phone" name="phone" maxLength={40} type="tel" autoComplete="tel" /></div>
+              <div className="guestbook-field"><label htmlFor="guest-date">Tanggal kunjungan</label><input id="guest-date" name="visit_date" required type="date" defaultValue={new Date().toISOString().slice(0, 10)} /></div>
+            </div>
+            <div className="guestbook-field"><label htmlFor="guest-purpose">Tujuan kunjungan</label><input id="guest-purpose" name="purpose" required minLength={2} maxLength={160} placeholder="Contoh: wisata edukasi" /></div>
+            <div className="guestbook-field"><label htmlFor="guest-message">Pesan dan kesan (opsional)</label><textarea id="guest-message" name="message" maxLength={1000} /></div>
+            <button className="guestbook-submit" type="submit" disabled={isSavingGuestbook}>{isSavingGuestbook ? 'Menyimpan...' : 'Simpan ke buku tamu'}</button>
+            {guestbookStatus && <p className={`guestbook-status ${guestbookStatus.startsWith('Buku') ? 'error' : ''}`} role="status">{guestbookStatus}</p>}
+          </form>
+        </div>
+      </section>
       <footer className="site-footer">
         <div className="page-width footer-inner">
           <div className="brand footer-brand">
