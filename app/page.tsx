@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -22,6 +22,7 @@ import {
 
 const heroImage = 'https://i.ibb.co.com/sdd1R1Ym/20250919-100259-IMG-3387.jpg'
 const detailImage = 'https://i.ibb.co.com/gMjPxRwL/20250919-100259-IMG-3387-Copy.jpg'
+const NARRATION_AUDIO_SRC = '/audio/narasi_kedunglantung.mp3'
 
 const WA_PHONE = '6281234567890'
 const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
@@ -132,6 +133,7 @@ export default function Page() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [speakingMascotId, setSpeakingMascotId] = useState<string | null>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -140,45 +142,60 @@ export default function Page() {
       }
     }
     document.addEventListener('click', handleClickOutside)
+
+    const audio = audioRef.current
+    const handlePlay = () => setIsPlaying(true)
+    const handlePause = () => setIsPlaying(false)
+    const handleEnded = () => setIsPlaying(false)
+
+    if (audio) {
+      audio.addEventListener('play', handlePlay)
+      audio.addEventListener('pause', handlePause)
+      audio.addEventListener('ended', handleEnded)
+    }
+
     return () => {
       document.removeEventListener('click', handleClickOutside)
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel()
       }
+      if (audio) {
+        audio.removeEventListener('play', handlePlay)
+        audio.removeEventListener('pause', handlePause)
+        audio.removeEventListener('ended', handleEnded)
+        audio.pause()
+      }
     }
   }, [])
 
   const toggleAudio = () => {
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      if (isPlaying) {
-        window.speechSynthesis.cancel()
-        setIsPlaying(false)
-      } else {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (isPlaying) {
+      audio.pause()
+    } else {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel()
         setSpeakingMascotId(null)
-        const text =
-          'Geopark Kedung Lantung, Bojonegoro, Jawa Timur. Kenalan dengan teman-teman kita: Mbah Lan, Mbak Tungga, Kak Kidung, dan Dek Keke. Empat sahabat dengan karakter dan keahlian yang berbeda yang menemani perjalanan petualangan kita di Kedung Lantung.'
-        const utterance = new SpeechSynthesisUtterance(text)
-        utterance.lang = 'id-ID'
-        utterance.rate = 0.95
-        utterance.onend = () => setIsPlaying(false)
-        utterance.onerror = () => setIsPlaying(false)
-        window.speechSynthesis.speak(utterance)
-        setIsPlaying(true)
       }
-    } else {
-      setIsPlaying(!isPlaying)
+      audio.play().catch((err) => {
+        console.error('Gagal memutar audio narasi:', err)
+      })
     }
   }
 
   const speakMascot = (id: string, text: string) => {
+    if (audioRef.current && !audioRef.current.paused) {
+      audioRef.current.pause()
+    }
+
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       if (speakingMascotId === id) {
         window.speechSynthesis.cancel()
         setSpeakingMascotId(null)
       } else {
         window.speechSynthesis.cancel()
-        setIsPlaying(false)
         const utterance = new SpeechSynthesisUtterance(text)
         utterance.lang = 'id-ID'
         utterance.rate = 0.95
@@ -381,7 +398,11 @@ export default function Page() {
             <span>WA Fast Response</span>
           </a>
 
-          <button className="audio-button" onClick={toggleAudio}>
+          <button
+            className={`audio-button ${isPlaying ? 'playing' : ''}`}
+            onClick={toggleAudio}
+            title={isPlaying ? 'Jeda narasi audio' : 'Putar narasi audio Kedung Lantung'}
+          >
             <span className="audio-icon">{isPlaying ? <Pause size={15} /> : <Play size={15} />}</span>
             {isPlaying ? 'Jeda narasi' : 'Dengarkan narasi'}
           </button>
@@ -480,7 +501,44 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="galeri" className="gallery-section page-width"><div className="gallery-heading"><div><p className="eyebrow">Momen di lapangan</p><h2>Rasakan <em>suasananya.</em></h2></div><span>Geser untuk menjelajah</span></div><div className="gallery-grid"><img src={heroImage} alt="Pemandangan Kedung Lantung" /><div className="gallery-card"><Volume2 size={22} /><p>Suara alam akan melengkapi perjalanan Anda.</p><small>FITUR AUDIO SEGERA HADIR</small></div><img src={detailImage} alt="Bebatuan di Kedung Lantung" /></div></section>
+      <section id="galeri" className="gallery-section page-width">
+        <div className="gallery-heading">
+          <div>
+            <p className="eyebrow">Momen di lapangan</p>
+            <h2>Rasakan <em>suasananya.</em></h2>
+          </div>
+          <span>Geser untuk menjelajah</span>
+        </div>
+        <div className="gallery-grid">
+          <img src={heroImage} alt="Pemandangan Kedung Lantung" />
+          <div className={`gallery-card ${isPlaying ? 'playing' : ''}`}>
+            <div className="gallery-card-top">
+              <Volume2 size={24} />
+              {isPlaying && (
+                <span className="audio-wave-anim" aria-label="Audio sedang diputar">
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              )}
+            </div>
+            <p>Dengarkan Narasi Kisah Kedung Lantung.</p>
+            <button
+              type="button"
+              className="gallery-audio-btn"
+              onClick={toggleAudio}
+              aria-label={isPlaying ? 'Jeda narasi audio' : 'Putar audio narasi'}
+            >
+              {isPlaying ? <Pause size={15} /> : <Play size={15} />}
+              <span>{isPlaying ? 'Jeda Narasi' : 'Putar Audio Narasi'}</span>
+            </button>
+            <small>AUDIO RESMI · MP3</small>
+          </div>
+          <img src={detailImage} alt="Bebatuan di Kedung Lantung" />
+        </div>
+      </section>
+
       <footer className="site-footer">
         <div className="page-width footer-inner">
           <div className="brand footer-brand">
@@ -500,6 +558,7 @@ export default function Page() {
           </div>
         </div>
       </footer>
+
       <a
         href={waUrl}
         target="_blank"
@@ -511,9 +570,18 @@ export default function Page() {
         <WhatsAppIcon size={24} />
         <span className="floating-wa-badge" aria-hidden="true" />
       </a>
-      <button className="floating-audio" onClick={toggleAudio} aria-label={isPlaying ? 'Jeda narasi' : 'Putar narasi'} title={isPlaying ? 'Jeda narasi' : 'Dengarkan narasi'}>
+
+      <button
+        className={`floating-audio ${isPlaying ? 'playing' : ''}`}
+        onClick={toggleAudio}
+        aria-label={isPlaying ? 'Jeda narasi' : 'Putar narasi audio'}
+        title={isPlaying ? 'Jeda narasi audio' : 'Dengarkan narasi audio Kedung Lantung'}
+      >
         {isPlaying ? <Pause size={18} /> : <Headphones size={18} />}
       </button>
+
+      {/* Audio element for official narration mp3 */}
+      <audio ref={audioRef} src={NARRATION_AUDIO_SRC} preload="metadata" />
     </main>
   )
 }
