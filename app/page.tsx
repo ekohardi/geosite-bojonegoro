@@ -35,8 +35,8 @@ const GOOGLE_MAPS_EMBED_URL =
 const GOOGLE_MAPS_DIR_URL =
   'https://www.google.com/maps/dir/?api=1&destination=-7.3546584,111.9819883'
 
-const WA_PHONE = '6281234567890'
-const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
+const WA_PHONE = '6285234506751'
+const WA_TEXT = encodeURIComponent('Halo Pokdarwis Geosite Kedung Lantung Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
 interface MascotItem {
@@ -221,9 +221,9 @@ export default function Page() {
   return (
     <main className="site-shell">
       <header className="site-header">
-        <a className="brand" href="#beranda" aria-label="Geopark Kedung Lantung">
+        <a className="brand" href="#beranda" aria-label="Geosite Kedung Lantung">
           <span className="brand-mark" aria-hidden="true"><Compass size={22} /></span>
-          <span><b>Geopark</b><small>Kedung Lantung</small></span>
+          <span><b>Geosite</b><small>Kedung Lantung</small></span>
         </a>
         <button
           className="menu-toggle"
@@ -795,7 +795,7 @@ export default function Page() {
         <div className="page-width footer-inner">
           <div className="brand footer-brand">
             <span className="brand-mark"><Compass size={22} /></span>
-            <span><b>Geopark</b><small>Kedung Lantung</small></span>
+            <span><b>Geosite</b><small>Kedung Lantung</small></span>
           </div>
           <p>Menjaga warisan bumi,<br />merawat cerita untuk generasi.</p>
           <div className="footer-meta">

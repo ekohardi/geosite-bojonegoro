@@ -26,8 +26,8 @@ import {
 const AUDIO_SRC = encodeURI('/audio/narasi kait kedunglantung budaya lokal.mp3')
 const POSTER_SRC = '/hubungkait-ekonomi.jpg'
 
-const WA_PHONE = '6281234567890'
-const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi mengenai Hubungkait Ekonomi dan Budaya Lokal Kedung Lantung.')
+const WA_PHONE = '6285234506751'
+const WA_TEXT = encodeURIComponent('Halo Pokdarwis Geosite Kedung Lantung Geopark Bojonegoro, saya ingin informasi mengenai Hubungkait Ekonomi dan Budaya Lokal Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
 function WhatsAppIcon({ size = 16, className = '' }: { size?: number; className?: string }) {
@@ -143,7 +143,7 @@ export default function HubungkaitEkonomiPage() {
           <a className="brand" href="/" aria-label="Kembali ke Beranda">
             <span className="brand-mark" aria-hidden="true"><Compass size={20} /></span>
             <span>
-              <b>Geopark</b>
+              <b>Geosite</b>
               <small>Kedung Lantung</small>
             </span>
           </a>
@@ -624,7 +624,7 @@ export default function HubungkaitEkonomiPage() {
         <div className="page-width hubungkait-footer-inner">
           <div className="footer-brand">
             <span className="brand-mark"><Compass size={18} /></span>
-            <span><b>Geopark</b> Bojonegoro · Kedung Lantung G-05</span>
+            <span><b>Geopark</b> Bojonegoro · Geosite Kedung Lantung</span>
           </div>
           <div className="footer-links">
             <a href="/">Beranda</a>
@@ -640,7 +640,7 @@ export default function HubungkaitEkonomiPage() {
             </a>
           </div>
           <p className="footer-copy">
-            © 2026 Geopark Kedung Lantung, Bojonegoro. Kolaborasi Pelestarian Budaya, Ekonomi & Geodiversitas.
+            © 2026 Geosite Kedung Lantung, Bojonegoro. Kolaborasi Pelestarian Budaya, Ekonomi & Geodiversitas.
           </p>
         </div>
       </footer>

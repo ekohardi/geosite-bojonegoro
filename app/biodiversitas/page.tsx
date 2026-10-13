@@ -19,8 +19,8 @@ import {
   Sparkles,
 } from 'lucide-react'
 
-const WA_PHONE = '6281234567890'
-const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin bertanya tentang hasil penelitian biodiversitas di Geosite Kedung Lantung.')
+const WA_PHONE = '6285234506751'
+const WA_TEXT = encodeURIComponent('Halo Pokdarwis Geosite Kedung Lantung Geopark Bojonegoro, saya ingin bertanya tentang hasil penelitian biodiversitas di Geosite Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
 interface FigureItem {
@@ -220,7 +220,7 @@ export default function BiodiversitasPage() {
           <a className="brand" href="/" aria-label="Kembali ke Beranda">
             <span className="brand-mark" aria-hidden="true"><Compass size={20} /></span>
             <span>
-              <b>Geopark</b>
+              <b>Geosite</b>
               <small>Kedung Lantung</small>
             </span>
           </a>
@@ -754,7 +754,7 @@ export default function BiodiversitasPage() {
           <div className="bio-prose">
             <p>
               Kedung Lantung memiliki karakteristik yang sangat unik karena merupakan geosite dengan <b>fenomena rembesan minyak bumi alami
-              di aliran sungai</b>. Berbeda dengan sungai yang tercemar limbah industri, tekanan ekologis pada Kedung Lantung berasal dari
+                di aliran sungai</b>. Berbeda dengan sungai yang tercemar limbah industri, tekanan ekologis pada Kedung Lantung berasal dari
               proses geologi alami yang sudah berlangsung ribuan tahun.
             </p>
             <p>
@@ -892,7 +892,7 @@ export default function BiodiversitasPage() {
         <div className="page-width bio-footer-inner">
           <div className="footer-brand">
             <span className="brand-mark"><Compass size={18} /></span>
-            <span><b>Geopark</b> Bojonegoro · Kedung Lantung G-05</span>
+            <span><b>Geopark</b> Bojonegoro · Geosite Kedung Lantung</span>
           </div>
           <div className="footer-links">
             <a href="/">Beranda</a>
