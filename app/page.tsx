@@ -4,12 +4,18 @@ import { useEffect, useState } from 'react'
 import {
   ArrowDown,
   ArrowUpRight,
+  BookOpen,
+  Camera,
+  ChevronDown,
   Compass,
+  ExternalLink,
   Headphones,
   MapPin,
   Menu,
+  MessageCircle,
   Pause,
   Play,
+  Users,
   Volume2,
   X,
 } from 'lucide-react'
@@ -123,10 +129,19 @@ function WhatsAppIcon({ size = 16, className = '' }: { size?: number; className?
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [speakingMascotId, setSpeakingMascotId] = useState<string | null>(null)
+
   useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (!(e.target as HTMLElement).closest('.nav-dropdown-wrapper')) {
+        setOpenDropdown(null)
+      }
+    }
+    document.addEventListener('click', handleClickOutside)
     return () => {
+      document.removeEventListener('click', handleClickOutside)
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel()
       }
@@ -182,26 +197,194 @@ export default function Page() {
           <span className="brand-mark" aria-hidden="true"><Compass size={22} /></span>
           <span><b>Geopark</b><small>Kedung Lantung</small></span>
         </a>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}>{menuOpen ? <X /> : <Menu />}</button>
+        <button
+          className="menu-toggle"
+          onClick={() => {
+            setMenuOpen(!menuOpen)
+            setOpenDropdown(null)
+          }}
+          aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+        >
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+
         <nav className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label="Navigasi utama">
-          <a href="#beranda" onClick={() => setMenuOpen(false)}>Beranda</a>
-          <a href="#tentang" onClick={() => setMenuOpen(false)}>Tentang</a>
-          <a href="#nilai" onClick={() => setMenuOpen(false)}>Nilai Geologi</a>
-          <a href="#tokoh" onClick={() => setMenuOpen(false)}>Pengenalan Tokoh</a>
-          <a href="#galeri" onClick={() => setMenuOpen(false)}>Galeri</a>
-          <a href="/buku-tamu" onClick={() => setMenuOpen(false)}>Isi Buku Tamu Kunjungan</a>
+          <a
+            href="#beranda"
+            onClick={() => {
+              setMenuOpen(false)
+              setOpenDropdown(null)
+            }}
+          >
+            Beranda
+          </a>
+
+          {/* DROPDOWN 1: Jelajah Geosite */}
+          <div className="nav-dropdown-wrapper">
+            <button
+              type="button"
+              className={`nav-dropdown-trigger ${openDropdown === 'geosite' ? 'open' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                setOpenDropdown(openDropdown === 'geosite' ? null : 'geosite')
+              }}
+              aria-expanded={openDropdown === 'geosite'}
+              aria-haspopup="true"
+            >
+              <span>Jelajah Geosite</span>
+              <ChevronDown size={14} />
+            </button>
+            <div className={`nav-dropdown-menu ${openDropdown === 'geosite' ? 'show' : ''}`}>
+              <a
+                href="#tentang"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <Compass size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">Tentang Geosite</strong>
+                  <span className="nav-dropdown-item-desc">Kisah bentang alam & sejarah bumi</span>
+                </span>
+              </a>
+
+              <a
+                href="#nilai"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <MapPin size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">Warisan Geologi</strong>
+                  <span className="nav-dropdown-item-desc">Keanekaragaman geologi kode G-05</span>
+                </span>
+              </a>
+
+              <a
+                href="#tokoh"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <Users size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">Pengenalan Tokoh</strong>
+                  <span className="nav-dropdown-item-desc">Kenalan dengan 4 sahabat geosite</span>
+                </span>
+              </a>
+
+              <a
+                href="#galeri"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <Camera size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">Galeri Lapangan</strong>
+                  <span className="nav-dropdown-item-desc">Dokumentasi suasana & batuan</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* DROPDOWN 2: Layanan Kunjungan */}
+          <div className="nav-dropdown-wrapper">
+            <button
+              type="button"
+              className={`nav-dropdown-trigger ${openDropdown === 'layanan' ? 'open' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                setOpenDropdown(openDropdown === 'layanan' ? null : 'layanan')
+              }}
+              aria-expanded={openDropdown === 'layanan'}
+              aria-haspopup="true"
+            >
+              <span>Layanan Tamu</span>
+              <ChevronDown size={14} />
+            </button>
+            <div className={`nav-dropdown-menu ${openDropdown === 'layanan' ? 'show' : ''}`}>
+              <a
+                href="/buku-tamu"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <BookOpen size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">
+                    Buku Tamu Digital
+                    <span className="nav-item-badge">Online</span>
+                  </strong>
+                  <span className="nav-dropdown-item-desc">Catat kehadiran & masukan Anda</span>
+                </span>
+              </a>
+
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <MessageCircle size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">
+                    WhatsApp Fast Response
+                    <ExternalLink size={12} style={{ opacity: 0.6 }} />
+                  </strong>
+                  <span className="nav-dropdown-item-desc">Konsultasi cepat admin geosite</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="wa-nav-button"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => {
+              setMenuOpen(false)
+              setOpenDropdown(null)
+            }}
             title="Chat WhatsApp Fast Response"
           >
             <WhatsAppIcon size={14} />
             <span>WA Fast Response</span>
           </a>
-          <button className="audio-button" onClick={toggleAudio}><span className="audio-icon">{isPlaying ? <Pause size={15} /> : <Play size={15} />}</span>{isPlaying ? 'Jeda narasi' : 'Dengarkan narasi'}</button>
+
+          <button className="audio-button" onClick={toggleAudio}>
+            <span className="audio-icon">{isPlaying ? <Pause size={15} /> : <Play size={15} />}</span>
+            {isPlaying ? 'Jeda narasi' : 'Dengarkan narasi'}
+          </button>
         </nav>
       </header>
 
@@ -306,6 +489,9 @@ export default function Page() {
           </div>
           <p>Menjaga warisan bumi,<br />merawat cerita untuk generasi.</p>
           <div className="footer-meta">
+            <a href="/buku-tamu" className="footer-guestbook-link" title="Isi Buku Tamu Kunjungan">
+              ✍️ Buku Tamu Kunjungan
+            </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="footer-wa-link" title="Chat WhatsApp Fast Response">
               <WhatsAppIcon size={14} /> WA Fast Response
             </a>
