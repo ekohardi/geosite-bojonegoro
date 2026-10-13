@@ -179,7 +179,7 @@ export default function BukuTamuPage() {
           <div className="guestbook-hero-card">
             <div className="guestbook-badge-pill">
               <span className="badge-dot" />
-              <span>Buku Tamu Resmi · Geosite G-05</span>
+              <span>Buku Tamu · Geosite Kedung Lantung</span>
             </div>
 
             <h1 className="guestbook-title">
@@ -284,9 +284,8 @@ export default function BukuTamuPage() {
             {/* Status Alert Notification */}
             {statusMessage && (
               <div
-                className={`guestbook-alert-banner ${
-                  statusType === 'success' ? 'alert-success' : 'alert-error'
-                }`}
+                className={`guestbook-alert-banner ${statusType === 'success' ? 'alert-success' : 'alert-error'
+                  }`}
                 role="status"
               >
                 <div className="alert-icon-wrap">
