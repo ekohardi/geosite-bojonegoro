@@ -227,7 +227,8 @@ export default function BiodiversitasPage() {
 
           <div className="bio-header-nav">
             <a href="/" className="bio-nav-link">Beranda</a>
-            <a href="/hubungkait" className="bio-nav-link">Hubungkait</a>
+            <a href="/hubungkait-ekonomi" className="bio-nav-link">Hubung Kait Ekonomi</a>
+            <a href="/hubungkait" className="bio-nav-link">Geologi & Hayati</a>
             <a href="/buku-tamu" className="bio-nav-link">Buku Tamu</a>
             <a href="/" className="bio-back-btn">
               <ArrowLeft size={16} />
@@ -895,10 +896,11 @@ export default function BiodiversitasPage() {
           </div>
           <div className="footer-links">
             <a href="/">Beranda</a>
+            <a href="/hubungkait-ekonomi">Hubung Kait Ekonomi</a>
+            <a href="/hubungkait">Geologi & Hayati</a>
             <a href="/#tentang">Tentang Geosite</a>
             <a href="/#nilai">Nilai Geologi</a>
             <a href="/#tokoh">Pengenalan Tokoh</a>
-            <a href="/hubungkait">Infografis Hubungkait</a>
             <a href="/buku-tamu">Buku Tamu Digital</a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer">
               Chat Admin WA

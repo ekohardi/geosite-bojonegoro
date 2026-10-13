@@ -606,10 +606,11 @@ export default function BukuTamuPage() {
           </div>
           <div className="footer-links-wrap">
             <a href="/" className="footer-link">Beranda</a>
-            <a href="/#tentang" className="footer-link">Tentang Geosite</a>
+            <a href="/hubungkait-ekonomi" className="footer-link">Hubung Kait Ekonomi</a>
+            <a href="/hubungkait" className="footer-link">Geologi & Hayati</a>
             <a href="/biodiversitas" className="footer-link">Biodiversitas</a>
+            <a href="/#tentang" className="footer-link">Tentang Geosite</a>
             <a href="/#tokoh" className="footer-link">Pengenalan Tokoh</a>
-            <a href="/hubungkait" className="footer-link">Infografis Hubungkait</a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="footer-wa-link">
               <WhatsAppIcon size={14} /> WhatsApp Admin
             </a>

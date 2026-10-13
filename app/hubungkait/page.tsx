@@ -151,6 +151,7 @@ export default function HubungkaitPage() {
 
           <div className="hubungkait-header-nav">
             <a href="/" className="hubungkait-nav-link">Beranda</a>
+            <a href="/hubungkait-ekonomi" className="hubungkait-nav-link">Hubung Kait Ekonomi</a>
             <a href="/biodiversitas" className="hubungkait-nav-link">Biodiversitas</a>
             <a href="/buku-tamu" className="hubungkait-nav-link">Buku Tamu</a>
             <a href="/" className="hubungkait-back-btn">
@@ -177,7 +178,7 @@ export default function HubungkaitPage() {
             <div className="player-track-info">
               <div className="track-title-row">
                 <span className="track-badge">VOICE OVER RESMI</span>
-                <strong className="track-title">Audio Hubungkait Kedung Lantung</strong>
+                <strong className="track-title">Audio Hubungan Geologi & Keanekaragaman Hayati</strong>
                 {isPlaying && (
                   <span className="audio-wave-anim small" aria-hidden="true">
                     <span />
@@ -239,14 +240,14 @@ export default function HubungkaitPage() {
           </div>
 
           <h1 className="hubungkait-title">
-            Hubungkait Kedung Lantung <br />
-            <em>Ekonomi, Budaya & Ekosistem Hayati</em>
+            Hubungan Geologi dan Keanekaragaman Hayati <br />
+            <em>di Ekosistem Kedung Lantung</em>
           </h1>
 
           <p className="hubungkait-desc">
-            Bagaimana fenomena geologi rembesan minyak alami (*lantung*) di sungai membentuk pola ekonomi warga,
-            melahirkan kearifan budaya leluhur, serta menciptakan rumah bagi keanekaragaman hayati yang khas?
-            Simak infografis edukatif berikut bersama audio narasi resmi sahabat Kedung Lantung.
+            Bagaimana fenomena geologi rembesan minyak alami (*lantung*) di dasar sungai membentuk habitat spesifik bagi
+            keanekaragaman hayati (plankton, nekton, bentos), keterkaitan trofik dengan burung Cekakak Jawa, hingga kearifan
+            tradisional lampu teplok (ublik) dan aksi bersama menjaga kelestarian sungai? Simak infografis edukatif berikut bersama audio narasi resmi sahabat Kedung Lantung.
           </p>
 
           <div className="hubungkait-quick-actions">
@@ -273,7 +274,7 @@ export default function HubungkaitPage() {
 
             <a
               href={POSTER_SRC}
-              download="Hubungkait_Kedunglantung_Infografis.jpg"
+              download="Hubungan_Geologi_dan_Keanekaragaman_Hayati_Kedung_Lantung.jpg"
               className="secondary-action-btn"
               title="Unduh file poster"
             >
@@ -289,7 +290,7 @@ export default function HubungkaitPage() {
             <div className="poster-top-bar">
               <div className="poster-top-title">
                 <Sparkles size={16} className="sparkle-icon" />
-                <span>Infografis Resmi: Geosite Kedung Lantung, Bojonegoro</span>
+                <span>Hubungan Geologi dan Keanekaragaman Hayati di Ekosistem Kedung Lantung</span>
               </div>
               <div className="poster-top-actions">
                 <button
@@ -316,7 +317,7 @@ export default function HubungkaitPage() {
             >
               <img
                 src={POSTER_SRC}
-                alt="Infografis Hubungkait Kedung Lantung dengan Ekonomi, Budaya, dan Keanekaragaman Hayati"
+                alt="Hubungan Geologi dan Keanekaragaman Hayati di Ekosistem Kedung Lantung"
                 className="poster-img"
               />
 
@@ -465,19 +466,19 @@ export default function HubungkaitPage() {
                 <div className="biota-grid">
                   <div className="biota-item">
                     <strong>Burung Cekakak Jawa</strong>
-                    <span>Burung riparian pemakan ikan kecil & indikator kesehatan sungai</span>
+                    <span>Burung riparian pemakan ikan & udang, indikator kesehatan ekosistem sungai</span>
                   </div>
                   <div className="biota-item">
                     <strong>Plankton Mikroskopis</strong>
-                    <span>Oscillatoria, Anabaena, Euglena produsen primer rantai makanan</span>
+                    <span>Oscillatoria, Anabaena, Euglena, Cyclotella penjaga keseimbangan ekosistem</span>
                   </div>
                   <div className="biota-item">
                     <strong>Nekton (Berenang Bebas)</strong>
-                    <span>Udang Galah dan Ikan Wader (Rasbora sp.)</span>
+                    <span>Udang Galah & Ikan Wader (Rasbora sp.) penjaga rantai makanan</span>
                   </div>
                   <div className="biota-item">
                     <strong>Bentos (Dasar Sungai)</strong>
-                    <span>Bekicot & Siput Air Tawar pengurai sedimen dan daur ulang nutrien</span>
+                    <span>Bekicot & Siput Air Tawar pengurai sedimen dan pendaur ulang nutrien</span>
                   </div>
                 </div>
               </article>
@@ -562,7 +563,7 @@ export default function HubungkaitPage() {
           >
             <div className="zoom-modal-top-bar">
               <div className="zoom-modal-info">
-                <strong>Infografis Hubungkait Kedung Lantung</strong>
+                <strong>Hubungan Geologi dan Keanekaragaman Hayati di Ekosistem Kedung Lantung</strong>
                 <span>Skala: {Math.round(zoomScale * 100)}%</span>
               </div>
               <div className="zoom-modal-controls">
@@ -592,7 +593,7 @@ export default function HubungkaitPage() {
                 </button>
                 <a
                   href={POSTER_SRC}
-                  download="Hubungkait_Kedunglantung_Infografis.jpg"
+                  download="Hubungan_Geologi_dan_Keanekaragaman_Hayati_Kedung_Lantung.jpg"
                   className="modal-ctrl-btn"
                   title="Unduh Gambar"
                 >
@@ -612,7 +613,7 @@ export default function HubungkaitPage() {
             <div className="zoom-modal-scrollable">
               <img
                 src={POSTER_SRC}
-                alt="Infografis Hubungkait Kedung Lantung Full Screen"
+                alt="Hubungan Geologi dan Keanekaragaman Hayati di Ekosistem Kedung Lantung (Ukuran Penuh)"
                 style={{
                   transform: `scale(${zoomScale})`,
                   transformOrigin: 'top center',
@@ -634,6 +635,7 @@ export default function HubungkaitPage() {
           </div>
           <div className="footer-links">
             <a href="/">Beranda</a>
+            <a href="/hubungkait-ekonomi">Hubung Kait Ekonomi</a>
             <a href="/#tentang">Tentang Geosite</a>
             <a href="/biodiversitas">Biodiversitas</a>
             <a href="/#nilai">Nilai Geologi</a>

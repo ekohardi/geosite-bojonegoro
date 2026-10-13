@@ -10,6 +10,7 @@ import {
   Compass,
   ExternalLink,
   Headphones,
+  Landmark,
   MapPin,
   Menu,
   MessageCircle,
@@ -306,6 +307,26 @@ export default function Page() {
               </a>
 
               <a
+                href="/hubungkait-ekonomi"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <Landmark size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">
+                    Hubung Kait Ekonomi
+                    <span className="nav-item-badge">Poster & Audio</span>
+                  </strong>
+                  <span className="nav-dropdown-item-desc">Pertanian, geoproduk & budaya lokal</span>
+                </span>
+              </a>
+
+              <a
                 href="/hubungkait"
                 className="nav-dropdown-item"
                 onClick={() => {
@@ -318,10 +339,10 @@ export default function Page() {
                 </span>
                 <span className="nav-dropdown-item-text">
                   <strong className="nav-dropdown-item-title">
-                    Hubungkait Geosite
+                    Hubungkait Geologi & Hayati
                     <span className="nav-item-badge">Poster & Audio</span>
                   </strong>
-                  <span className="nav-dropdown-item-desc">Ekonomi, budaya & ekosistem hayati</span>
+                  <span className="nav-dropdown-item-desc">Rembesan minyak alami & biota sungai</span>
                 </span>
               </a>
 
@@ -589,14 +610,17 @@ export default function Page() {
           </div>
           <p>Menjaga warisan bumi,<br />merawat cerita untuk generasi.</p>
           <div className="footer-meta">
+            <a href="/hubungkait-ekonomi" className="footer-guestbook-link" title="Hubung Kait Ekonomi dan Budaya Lokal">
+              🌾 Hubung Kait Ekonomi
+            </a>
+            <a href="/hubungkait" className="footer-guestbook-link" title="Hubungkait Geologi & Keanekaragaman Hayati">
+              🖼️ Geologi & Hayati
+            </a>
             <a href="/biodiversitas" className="footer-guestbook-link" title="Kajian Biodiversitas Kedung Lantung">
               🔬 Biodiversitas Kedung Lantung
             </a>
             <a href="/buku-tamu" className="footer-guestbook-link" title="Isi Buku Tamu Kunjungan">
               ✍️ Buku Tamu Kunjungan
-            </a>
-            <a href="/hubungkait" className="footer-guestbook-link" title="Infografis Hubungkait">
-              🖼️ Infografis Hubungkait
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="footer-wa-link" title="Chat WhatsApp Fast Response">
               <WhatsAppIcon size={14} /> WA Fast Response
