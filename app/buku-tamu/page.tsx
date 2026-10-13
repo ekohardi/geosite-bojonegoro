@@ -609,8 +609,8 @@ export default function BukuTamuPage() {
             <a href="/hubungkait-ekonomi" className="footer-link">Hubung Kait Ekonomi</a>
             <a href="/hubungkait" className="footer-link">Geologi & Hayati</a>
             <a href="/biodiversitas" className="footer-link">Biodiversitas</a>
-            <a href="/#tentang" className="footer-link">Tentang Geosite</a>
-            <a href="/#tokoh" className="footer-link">Pengenalan Tokoh</a>
+            <a href="/#lokasi" className="footer-link">Peta Lokasi</a>
+            <a href="https://www.google.com/maps/place/Wisata+Air+Kedunglantung/@-7.3543218,111.9820539,19.68z/data=!4m14!1m7!3m6!1s0x2e782fdd7fefb283:0x13a6eb104b5b8f9d!2sKedung+Lantung!8m2!3d-7.354203!4d111.9828018!16s%2Fg%2F11jb83q_dy!3m5!1s0x2e782e5c81f187ff:0x89626e76beac4ded!8m2!3d-7.3546584!4d111.9819883!16s%2Fg%2F11g69g7qfv?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="footer-link">📍 Google Maps</a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="footer-wa-link">
               <WhatsAppIcon size={14} /> WhatsApp Admin
             </a>

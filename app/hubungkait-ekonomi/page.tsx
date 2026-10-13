@@ -628,11 +628,12 @@ export default function HubungkaitEkonomiPage() {
           </div>
           <div className="footer-links">
             <a href="/">Beranda</a>
-            <a href="/#tentang">Tentang Geosite</a>
             <a href="/hubungkait">Geologi & Hayati</a>
             <a href="/biodiversitas">Biodiversitas</a>
-            <a href="/#nilai">Nilai Geologi</a>
-            <a href="/#tokoh">Pengenalan Tokoh</a>
+            <a href="/#lokasi">Peta Lokasi</a>
+            <a href="https://www.google.com/maps/place/Wisata+Air+Kedunglantung/@-7.3543218,111.9820539,19.68z/data=!4m14!1m7!3m6!1s0x2e782fdd7fefb283:0x13a6eb104b5b8f9d!2sKedung+Lantung!8m2!3d-7.354203!4d111.9828018!16s%2Fg%2F11jb83q_dy!3m5!1s0x2e782e5c81f187ff:0x89626e76beac4ded!8m2!3d-7.3546584!4d111.9819883!16s%2Fg%2F11g69g7qfv?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+              📍 Google Maps
+            </a>
             <a href="/buku-tamu">Buku Tamu Digital</a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon size={14} /> WhatsApp Admin

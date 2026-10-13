@@ -15,6 +15,7 @@ import {
   Menu,
   MessageCircle,
   Microscope,
+  Navigation,
   Pause,
   Play,
   Sparkles,
@@ -26,6 +27,13 @@ import {
 const heroImage = 'https://i.ibb.co.com/sdd1R1Ym/20250919-100259-IMG-3387.jpg'
 const detailImage = 'https://i.ibb.co.com/gMjPxRwL/20250919-100259-IMG-3387-Copy.jpg'
 const NARRATION_AUDIO_SRC = '/audio/narasi_kedunglantung.mp3'
+
+const GOOGLE_MAPS_URL =
+  'https://www.google.com/maps/place/Wisata+Air+Kedunglantung/@-7.3543218,111.9820539,19.68z/data=!4m14!1m7!3m6!1s0x2e782fdd7fefb283:0x13a6eb104b5b8f9d!2sKedung+Lantung!8m2!3d-7.354203!4d111.9828018!16s%2Fg%2F11jb83q_dy!3m5!1s0x2e782e5c81f187ff:0x89626e76beac4ded!8m2!3d-7.3546584!4d111.9819883!16s%2Fg%2F11g69g7qfv?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D'
+const GOOGLE_MAPS_EMBED_URL =
+  'https://maps.google.com/maps?q=-7.3546584,111.9819883&hl=id&z=17&output=embed'
+const GOOGLE_MAPS_DIR_URL =
+  'https://www.google.com/maps/dir/?api=1&destination=-7.3546584,111.9819883'
 
 const WA_PHONE = '6281234567890'
 const WA_TEXT = encodeURIComponent('Halo Admin Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
@@ -382,6 +390,26 @@ export default function Page() {
                   <span className="nav-dropdown-item-desc">Dokumentasi suasana & batuan</span>
                 </span>
               </a>
+
+              <a
+                href="#lokasi"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <MapPin size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">
+                    Peta & Lokasi Geosite
+                    <span className="nav-item-badge">Maps</span>
+                  </strong>
+                  <span className="nav-dropdown-item-desc">Titik GPS & navigasi Google Maps</span>
+                </span>
+              </a>
             </div>
           </div>
 
@@ -442,6 +470,27 @@ export default function Page() {
                   <span className="nav-dropdown-item-desc">Konsultasi cepat admin geosite</span>
                 </span>
               </a>
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-dropdown-item"
+                onClick={() => {
+                  setMenuOpen(false)
+                  setOpenDropdown(null)
+                }}
+              >
+                <span className="nav-dropdown-item-icon">
+                  <MapPin size={16} />
+                </span>
+                <span className="nav-dropdown-item-text">
+                  <strong className="nav-dropdown-item-title">
+                    Google Maps Lokasi
+                    <ExternalLink size={12} style={{ opacity: 0.6 }} />
+                  </strong>
+                  <span className="nav-dropdown-item-desc">Navigasi langsung ke Wisata Air</span>
+                </span>
+              </a>
             </div>
           </div>
 
@@ -495,7 +544,7 @@ export default function Page() {
       <section id="nilai" className="feature-section">
         <div className="page-width feature-grid">
           <div className="feature-copy"><p className="eyebrow">Warisan geologi</p><h2>Lebih dari<br /><em>sekadar tempat.</em></h2><p className="muted">Kedung Lantung menyimpan nilai ilmiah, pendidikan, dan pariwisata. Setiap lekuk batu dan aliran air membentuk ruang belajar yang hidup.</p><div className="stat-row"><div><strong>G-05</strong><span>Kode geosite</span></div><div><strong>Geo-<br />diversitas</strong><span>Jenis warisan</span></div></div></div>
-          <div className="feature-visual"><img src={detailImage} alt="Detail aliran air dan bebatuan Kedung Lantung" /><div className="image-note"><MapPin size={16} /> Kedung Lantung, Bojonegoro</div></div>
+          <div className="feature-visual"><img src={detailImage} alt="Detail aliran air dan bebatuan Kedung Lantung" /><div className="image-note"><MapPin size={16} /><a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="image-note-map-link" title="Buka titik Wisata Air Kedunglantung di Google Maps">Kedung Lantung, Bojonegoro (Buka Peta) <ExternalLink size={12} /></a></div></div>
         </div>
       </section>
 
@@ -602,6 +651,146 @@ export default function Page() {
         </div>
       </section>
 
+      {/* SECTION: Lokasi & Google Maps */}
+      <section id="lokasi" className="maps-section page-width">
+        <div className="section-kicker"><span>03</span><i /></div>
+        <div className="maps-header">
+          <div>
+            <p className="eyebrow">Lokasi & Akses Kunjungan</p>
+            <h2>Peta Lokasi <em>Kedung Lantung.</em></h2>
+          </div>
+          <p className="maps-header-desc">
+            Kunjungi langsung situs warisan geologi dan rembesan minyak bumi alami di Desa Drenges, Kecamatan Sugihwaras, Kabupaten Bojonegoro.
+          </p>
+        </div>
+
+        <div className="maps-layout">
+          {/* Card Info & Navigation */}
+          <div className="maps-info-card">
+            <div className="maps-info-top">
+              <div className="maps-badge-pill">
+                <span className="pill-dot" />
+                <span>Geosite G-05 · Bojonegoro</span>
+              </div>
+              <h3 className="maps-card-title">Wisata Air Kedunglantung</h3>
+              <p className="maps-card-desc">
+                Kawasan cagar geologi unik dengan fenomena rembesan minyak bumi alami (*lantung*) di dasar sungai yang dikelilingi rimbunnya hutan jati dan keramahan warga pedesaan.
+              </p>
+            </div>
+
+            <div className="maps-details-list">
+              <div className="maps-detail-item">
+                <div className="maps-detail-icon">
+                  <MapPin size={18} />
+                </div>
+                <div className="maps-detail-text">
+                  <strong>Alamat & Wilayah</strong>
+                  <span>Desa Drenges, Kec. Sugihwaras, Kabupaten Bojonegoro, Jawa Timur 62193</span>
+                </div>
+              </div>
+
+              <div className="maps-detail-item">
+                <div className="maps-detail-icon">
+                  <Compass size={18} />
+                </div>
+                <div className="maps-detail-text">
+                  <strong>Titik Koordinat GPS</strong>
+                  <span>-7.3546584, 111.9819883 (Presisi Tinggi)</span>
+                </div>
+              </div>
+
+              <div className="maps-detail-item">
+                <div className="maps-detail-icon">
+                  <Navigation size={18} />
+                </div>
+                <div className="maps-detail-text">
+                  <strong>Aksesibilitas Kendaraan</strong>
+                  <span>Dapat dijangkau kendaraan roda dua & roda empat hingga area parkir wisata</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="maps-actions-group">
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="maps-primary-btn"
+                title="Buka titik Wisata Air Kedunglantung di aplikasi Google Maps"
+              >
+                <MapPin size={16} />
+                <span>Buka di Google Maps</span>
+                <ExternalLink size={14} />
+              </a>
+
+              <div className="maps-secondary-row">
+                <a
+                  href={GOOGLE_MAPS_DIR_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="maps-secondary-btn"
+                  title="Panduan rute navigasi dari posisi Anda"
+                >
+                  <Navigation size={15} />
+                  <span>Petunjuk Rute</span>
+                </a>
+
+                <a
+                  href="/buku-tamu"
+                  className="maps-secondary-btn"
+                  title="Isi buku tamu kunjungan resmi"
+                >
+                  <BookOpen size={15} />
+                  <span>Buku Tamu</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Interactive Google Maps Frame */}
+          <div className="maps-frame-container">
+            <div className="maps-frame-top-bar">
+              <div className="maps-frame-title">
+                <MapPin size={16} />
+                <span>Peta Interaktif: Wisata Air Kedunglantung</span>
+              </div>
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="maps-frame-btn"
+                title="Buka peta ukuran penuh di tab baru"
+              >
+                <span>Buka Penuh</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
+
+            <div className="maps-iframe-wrap">
+              <iframe
+                title="Peta Lokasi Wisata Air Kedunglantung Bojonegoro"
+                src={GOOGLE_MAPS_EMBED_URL}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+
+            <div className="maps-frame-bottom-bar">
+              <span>💡 Gunakan kontrol pada peta untuk memperbesar (zoom) atau melihat rute jalan.</span>
+              <a
+                href={GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--teal)', fontWeight: 700, textDecoration: 'underline', fontSize: '12px' }}
+              >
+                Lihat Ulasan & Foto Google Maps →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer className="site-footer">
         <div className="page-width footer-inner">
           <div className="brand footer-brand">
@@ -621,6 +810,15 @@ export default function Page() {
             </a>
             <a href="/buku-tamu" className="footer-guestbook-link" title="Isi Buku Tamu Kunjungan">
               ✍️ Buku Tamu Kunjungan
+            </a>
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-guestbook-link"
+              title="Buka Lokasi Wisata Air Kedunglantung di Google Maps"
+            >
+              📍 Peta Google Maps
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" className="footer-wa-link" title="Chat WhatsApp Fast Response">
               <WhatsAppIcon size={14} /> WA Fast Response
