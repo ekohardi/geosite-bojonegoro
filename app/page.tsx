@@ -141,6 +141,9 @@ export default function Page() {
       phone: String(form.get('phone') ?? '').trim() || null,
       visit_date: String(form.get('visit_date') ?? ''),
       purpose: String(form.get('purpose') ?? '').trim(),
+      home_address: String(form.get('home_address') ?? '').trim() || null,
+      information_source: String(form.get('information_source') ?? '').trim() || null,
+      feedback: String(form.get('feedback') ?? '').trim() || null,
       message: String(form.get('message') ?? '').trim() || null,
     })
     setIsSavingGuestbook(false)
@@ -336,11 +339,14 @@ export default function Page() {
             <div className="guestbook-fields">
               <div className="guestbook-field"><label htmlFor="guest-name">Nama lengkap</label><input id="guest-name" name="name" required minLength={2} maxLength={120} autoComplete="name" /></div>
               <div className="guestbook-field"><label htmlFor="guest-institution">Asal instansi/komunitas</label><input id="guest-institution" name="institution" required minLength={2} maxLength={160} /></div>
-              <div className="guestbook-field"><label htmlFor="guest-phone">Nomor telepon (opsional)</label><input id="guest-phone" name="phone" maxLength={40} type="tel" autoComplete="tel" /></div>
-              <div className="guestbook-field"><label htmlFor="guest-date">Tanggal kunjungan</label><input id="guest-date" name="visit_date" required type="date" defaultValue={new Date().toISOString().slice(0, 10)} /></div>
-            </div>
-            <div className="guestbook-field"><label htmlFor="guest-purpose">Tujuan kunjungan</label><input id="guest-purpose" name="purpose" required minLength={2} maxLength={160} placeholder="Contoh: wisata edukasi" /></div>
-            <div className="guestbook-field"><label htmlFor="guest-message">Pesan dan kesan (opsional)</label><textarea id="guest-message" name="message" maxLength={1000} /></div>
+          <div className="guestbook-field"><label htmlFor="guest-phone">Nomor telepon (opsional)</label><input id="guest-phone" name="phone" maxLength={40} type="tel" autoComplete="tel" /></div>
+          <div className="guestbook-field"><label htmlFor="guest-date">Tanggal kunjungan</label><input id="guest-date" name="visit_date" required type="date" defaultValue={new Date().toISOString().slice(0, 10)} /></div>
+        </div>
+        <div className="guestbook-field"><label htmlFor="guest-address">Alamat rumah</label><textarea id="guest-address" name="home_address" maxLength={240} placeholder="Kota/kabupaten tempat tinggal" /></div>
+        <div className="guestbook-field"><label htmlFor="guest-purpose">Tujuan kunjungan</label><input id="guest-purpose" name="purpose" required minLength={2} maxLength={160} placeholder="Contoh: wisata edukasi" /></div>
+        <div className="guestbook-field"><label htmlFor="guest-source">Mendapatkan informasi terkait Kedung Lantung dari</label><select id="guest-source" name="information_source" defaultValue=""><option value="" disabled>Pilih sumber informasi</option><option value="Teman">Teman</option><option value="Media sosial">Media sosial</option><option value="Website">Website</option><option value="Lainnya">Lainnya</option></select></div>
+        <div className="guestbook-field"><label htmlFor="guest-feedback">Kritik dan saran (opsional)</label><textarea id="guest-feedback" name="feedback" maxLength={1000} placeholder="Bagikan masukan Anda untuk pengembangan Kedung Lantung" /></div>
+        <div className="guestbook-field"><label htmlFor="guest-message">Pesan dan kesan (opsional)</label><textarea id="guest-message" name="message" maxLength={1000} /></div>
             <button className="guestbook-submit" type="submit" disabled={isSavingGuestbook}>{isSavingGuestbook ? 'Menyimpan...' : 'Simpan ke buku tamu'}</button>
             {guestbookStatus && <p className={`guestbook-status ${guestbookStatus.startsWith('Buku') ? 'error' : ''}`} role="status">{guestbookStatus}</p>}
           </form>
