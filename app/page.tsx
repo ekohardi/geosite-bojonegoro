@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
+import { getSupabaseClient } from '@/lib/supabase/client'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -144,7 +145,24 @@ export default function Page() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [speakingMascotId, setSpeakingMascotId] = useState<string | null>(null)
+  const [visitorCount, setVisitorCount] = useState<number | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    const supabase = getSupabaseClient()
+    if (!supabase) return
+
+    let active = true
+    supabase.rpc('increment_site_visitor_count').then(({ data, error }) => {
+      if (!error && typeof data === 'number' && active) {
+        setVisitorCount(data)
+      }
+    })
+
+    return () => {
+      active = false
+    }
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -543,7 +561,7 @@ export default function Page() {
 
       <section id="nilai" className="feature-section">
         <div className="page-width feature-grid">
-          <div className="feature-copy"><p className="eyebrow">Warisan geologi</p><h2>Lebih dari<br /><em>sekadar tempat.</em></h2><p className="muted">Kedung Lantung menyimpan nilai ilmiah, pendidikan, dan pariwisata. Setiap lekuk batu dan aliran air membentuk ruang belajar yang hidup.</p><div className="stat-row"><div><strong>G-05</strong><span>Kode geosite</span></div><div><strong>Geo-<br />diversitas</strong><span>Jenis warisan</span></div></div></div>
+          <div className="feature-copy"><p className="eyebrow">Warisan geologi</p><h2>Lebih dari<br /><em>sekadar tempat.</em></h2><p className="muted">Kedung Lantung menyimpan nilai ilmiah, pendidikan, dan pariwisata. Setiap lekuk batu dan aliran air membentuk ruang belajar yang hidup.</p><div className="stat-row"><div><strong>G-05</strong><span>Kode geosite</span></div><div><strong>Geo-<br />diversitas</strong><span>Jenis warisan</span></div><div className="visitor-stat"><strong>{visitorCount === null ? '—' : visitorCount.toLocaleString('id-ID')}</strong><span>Pengunjung website</span></div></div></div>
           <div className="feature-visual"><img src={detailImage} alt="Detail aliran air dan bebatuan Kedung Lantung" /><div className="image-note"><MapPin size={16} /><a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="image-note-map-link" title="Buka titik Wisata Air Kedunglantung di Google Maps">Kedung Lantung, Bojonegoro (Buka Peta) <ExternalLink size={12} /></a></div></div>
         </div>
       </section>
