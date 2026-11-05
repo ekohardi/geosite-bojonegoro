@@ -36,7 +36,7 @@ const GOOGLE_MAPS_EMBED_URL =
 const GOOGLE_MAPS_DIR_URL =
   'https://www.google.com/maps/dir/?api=1&destination=-7.3546584,111.9819883'
 
-const WA_PHONE = '6285234506751'
+const WA_PHONE = '6285234506761'
 const WA_TEXT = encodeURIComponent('Halo Pokdarwis Geosite Kedung Lantung Geopark Bojonegoro, saya ingin informasi fast response mengenai Geosite Kedung Lantung.')
 const waUrl = `https://wa.me/${WA_PHONE}?text=${WA_TEXT}`
 
