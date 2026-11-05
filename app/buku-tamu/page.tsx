@@ -164,6 +164,10 @@ export default function BukuTamuPage() {
             </span>
           </a>
           <div className="guestbook-header-actions">
+            <a href="/buku-tamu/hasil" className="guestbook-admin-link">
+              <ShieldCheck size={15} />
+              <span>Hasil Buku Tamu</span>
+            </a>
             <a href="/" className="guestbook-back-button">
               <ArrowLeft size={16} />
               <span>Kembali ke Beranda</span>
